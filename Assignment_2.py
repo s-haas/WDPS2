@@ -11,14 +11,6 @@ from sklearn.metrics import train_test_split
 from sklearn.metrics import confusion_matrix
 
 
-def read_sentences(sentence_file):
-    sentences = pd.read_csv(sentence_file, sep='\t', index_col='sentence_index')
-    return sentences
-
-def extract_entity_sentence_pairs():
-    
-    return
-
 def adjust_to_sentiment_range(model_output):
     
     return 2 * model_output - 1
