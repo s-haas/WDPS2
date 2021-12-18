@@ -6,6 +6,20 @@ from bs4 import BeautifulSoup
 def get_parsed_website(url):
     return BeautifulSoup(requests.get(url).text, features="lxml")
 
+
+def search_for_movies(query):
+    doc = get_parsed_website(f"https://www.rottentomatoes.com/search?search={query}")
+    rows = doc.find_all("search-page-media-row")
+    def extract_information(row):
+        title_obj = row.find("a", {"slot": "title"})
+        return {
+            "title": title_obj.text.strip(),
+            "link": title_obj["href"],
+            "id": title_obj["href"][len("https://www.rottentomatoes.com/m/"):]
+        }
+
+    return [extract_information(row) for row in rows]
+
 def reviews_for_movie(movie_id):
     doc = get_parsed_website(f"https://www.rottentomatoes.com/m/{movie_id}/reviews")
     rows = doc.find_all(True, ["review_table_row"])
@@ -33,4 +47,3 @@ def reviews_of_critic(critic_id):
 
     return [extract_information(review) for review in reviews]
 
-print(json.dumps(reviews_of_critic("cate-young")[:5], indent=2))
