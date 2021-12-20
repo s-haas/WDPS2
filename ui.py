@@ -7,11 +7,11 @@ def search_for_movie():
     return search_for_movies(movie_query)
 
 def choose_movie(movie_suggestions):
-    return choose(movie_suggestions, lambda movie: f"{movie['title']}")
+    return choose(movie_suggestions, lambda movie: f"{movie['title']} ({movie['year']}; {', '.join(movie['cast'])})")
 
 def choose_review(movie):
     reviews = reviews_for_movie(movie['id'])
-    return choose(reviews, lambda rv: f"{rv['critic_name']}: {rv['content'][:100]}", prompt=f"\nReviews for {movie['title']}")
+    return choose(reviews, lambda rv: f"{rv['critic_name']}: {rv['content']}", prompt=f"\nReviews for {movie['title']}")
 
 
 
