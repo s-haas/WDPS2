@@ -50,3 +50,9 @@ def reviews_of_critic(critic_id):
         }
 
     return [extract_information(review) for review in reviews]
+
+if __name__ == "__main__":
+    reviews = reviews_of_critic("cate-young")
+    with open('data/rottentomatoes.json', 'w') as file:
+        file.write(json.dumps(reviews, indent=2))
+    print(json.dumps(reviews[:5], indent=2))
