@@ -1,6 +1,6 @@
 # Analyzing sentiments of movie reviewers
 
-*by Stefan Haas, Leonhard Wattenbach and Willem van der Spek*
+*by Stefan de Haas, Leonhard Wattenbach and Willem van der Spek*
 
 ***Abstract.**
 Movie reviews can help to find out if a certain movie is worth watching or not. We built a prototype for a tool that analyzes the sentiments of all reviews per reviewer by using machine learning methods. The user of this tool can then after reading a review see if this reviewer usually writes rather positive or rather negative reviews.*
