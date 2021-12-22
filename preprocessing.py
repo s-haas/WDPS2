@@ -53,7 +53,7 @@ def preprocess(raw_df, column_name, fpath):
     raw_df[column_name] = raw_df[column_name].apply(remove_punct)
     raw_df[column_name] = raw_df[column_name].apply(lambda x: x.lower())
     
-    raw_df.to_csv(fpath, sep='|')
+    #raw_df.to_csv(fpath, sep='|')
     return
 
 def encode_sentence(sentence, model):
@@ -92,7 +92,7 @@ def encode(df, column_name, model, fpath='data/encoded_sentences.csv'):
 
     """
     df[column_name + '_encoded'] = df[column_name].apply(encode_sentence, model=model)
-    df.to_csv(fpath, sep='|')
+    #df.to_csv(fpath, sep='|')
     return
 
 def remove_punct(txt):

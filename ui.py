@@ -5,7 +5,7 @@ import tempfile
 from rottentomatoes import search_for_movies, reviews_for_movie, reviews_of_critic
 from ui_chooser import choose
 
-def json_to_file(json_obj, fpath="./data/critic_reviews.json"):
+def json_to_file(json_obj, fpath="data/critic_reviews.json"):
     if not fpath.endswith(".json"):
         return False
     with open(fpath, 'w', encoding='utf-8') as f:
@@ -31,9 +31,9 @@ def main():
 
     # print(f"\n{review['critic_name']} is typically very negative (-0.968)") # MOCK
     json_to_file(reviews_of_critic(review["critic_id"]))
-    # pred = model()
-    # sentiment, sentiment_text = gather_result(pred)
-    # print(f"\n{review['critic_name']} is typically {sentiment_text} ({sentiment})")
+    pred = model()
+    sentiment, sentiment_text = gather_result(pred)
+    print(f"\n{review['critic_name']} is typically {sentiment_text} ({sentiment})")
 
 def search_for_movie():
     while(True):
