@@ -118,17 +118,17 @@ def main():
     model3 = LogisticRegression()
     train_data, test_data = train_test_split(input_sents, train_size=0.7, random_state = 42)
     
-    model = model3
+    model = model2
     model.fit(np.array(train_data['sentence_encoded']).reshape(-1,1), train_data['label'])
-    comp = make_comparison_file(model, test_data, 'data/comp.csv', 'predicted_sentiment', True)
+    comp = make_comparison_file(model, test_data, 'data/comp.csv', 'predicted_sentiment', False)
     
     print(mae(comp['predicted_sentiment'], comp['num']))
     
     final_sents = pd.read_csv('data/encoded_final_sentences.csv', sep='|')
     final_sents.drop('Unnamed: 0', axis=1, inplace=True)
-    final_sents['pred'] = model.predict_proba(np.array(final_sents['content_encoded']).reshape(-1,1))[:,1]
-    #final_sents['pred'] = model.predict(np.array(final_sents['content_encoded']).reshape(-1,1))
-    #final_sents.to_csv('data/critic_preds.csv', sep='|')
+    # final_sents['pred'] = model.predict_proba(np.array(final_sents['content_encoded']).reshape(-1,1))[:,1]
+    final_sents['pred'] = model.predict(np.array(final_sents['content_encoded']).reshape(-1,1))
+    # final_sents.to_csv('data/critic_preds.csv', sep='|')
     return final_sents['pred']
 
 

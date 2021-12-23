@@ -13,6 +13,7 @@ import numpy as np
 
 from gensim.models import Word2Vec
 from nltk.tokenize import word_tokenize
+from sklearn.preprocessing import MinMaxScaler
 
 """
 def read_csv(fpath, delimiter='|'):
@@ -70,8 +71,11 @@ def encode_sentence(sentence, model):
     sentence encoded/embedded into a number
 
     """
+    scaler = MinMaxScaler(feature_range = (0,1))
+
     sent_mat = [model.wv[token] for token in word_tokenize(sentence)]
-    #sent_mat = np.hstack(sent_mat)
+    scaler.fit(sent_mat)
+    sent_mat = scaler.transform(sent_mat)
     return sum(np.add.reduce(sent_mat))
 
 def encode(df, column_name, model, fpath='data/encoded_sentences.csv'):
